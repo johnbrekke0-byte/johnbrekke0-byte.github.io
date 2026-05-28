@@ -833,7 +833,7 @@ function renderProfile() {
 
 function renderSheetOverlay() {
   return `<div class="sheet-overlay" data-action="close-sheet">
-    <div class="sheet" data-action="noop" onclick="event.stopPropagation()">
+    <div class="sheet" data-action="noop">
       <div class="sheet-handle"></div>
       <div class="sheet-header">
         <button class="close-btn" data-action="close-sheet">Close</button>
@@ -873,7 +873,6 @@ function renderSheet() {
       </div>
       ${renderSheetBody()}`;
   }
-  attachEventListeners();
   if (state.sheet?.phase === 'record' && state.isRecording) startWaveform();
   if (state.sheet?.phase === 'result') animateScoreRing(state.sheet.result.overall);
 }
@@ -1145,9 +1144,8 @@ async function handleClick(e) {
 
 // ─── BOOT ────────────────────────────────────────────────────────────────────
 
+attachEventListeners();
 render();
-// Re-attach listeners after each render
-const origRender = render;
 </script>
 </body>
 </html>
